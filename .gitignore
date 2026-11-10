@@ -1,5 +1,6 @@
-﻿venv/
+venv/
+resume.db
 __pycache__/
+uploads/
 *.pyc
 .env
-.vscode/
