@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Resume Analyser — Premium</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo"><span class="logo-icon">⚡</span> AI Analyser</div>
+      <nav class="nav-menu">
+        <a href="#upload" class="nav-link active">Dashboard</a>
+        <a href="#charts" class="nav-link">Analytics</a>
+        <a href="#interview" class="nav-link">Interview Prep</a>
+      </nav>
+      
+      <!-- Theme Toggle -->
+      <div class="theme-toggle-container">
+        <span>Dark Mode</span>
+        <label class="switch">
+          <input type="checkbox" id="theme-toggle" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="sidebar-footer"><p>Powered by Ollama</p></div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="top-header">
+        <h1>Talent Intelligence Dashboard</h1>
+        <p class="subtitle">Upload your resume and job description for deep AI analysis.</p>
+      </header>
+
+      <!-- Upload Section -->
+      <section class="card upload-card" id="upload">
+        <div class="card-header"><h2>1. Upload & Target</h2></div>
+        <div class="card-body">
+          <textarea id="jd" placeholder="Paste the job description here…"></textarea>
+          <div class="upload-row">
+            <div class="file-input-wrapper">
+              <input type="file" id="file" accept=".pdf,.docx,.doc,.txt">
+              <label for="file" class="file-label">Choose Resume</label>
+              <span id="file-name" class="file-name">No file chosen</span>
+            </div>
+            <button id="btn-upload" class="primary-btn">Run Deep Analysis</button>
+          </div>
+          <div id="upload-status" class="status-bar"></div>
+        </div>
+      </section>
+
+      <!-- Live Analysis -->
+      <section class="card live-card" id="live-card" hidden>
+        <div class="card-header"><h2>Live AI Reasoning <span class="pulse-dot"></span></h2></div>
+        <div class="card-body"><pre id="live-out" class="stream-output"></pre></div>
+      </section>
+
+      <!-- Analytics & Charts -->
+      <section class="card analytics-card" id="charts-card" hidden>
+        <div class="card-header"><h2>Extreme Analytics & Benchmarks</h2></div>
+        <div class="card-body">
+          <div class="gauge-container">
+            <div class="gauge-header">
+              <span>Ideal Candidate Match</span>
+              <span id="ideal-score" class="gauge-score">0%</span>
+            </div>
+            <div class="gauge-track"><div id="ideal-bar" class="gauge-fill"></div></div>
+          </div>
+          <div class="benchmark-grid">
+            <div class="bench-item"><span class="b-label">ATS Parseability</span><span id="b-ats" class="b-value">—</span></div>
+            <div class="bench-item"><span class="b-label">Keyword Match</span><span id="b-kw" class="b-value">—</span></div>
+            <div class="bench-item"><span class="b-label">Impact Density</span><span id="b-imp" class="b-value">—</span></div>
+            <div class="bench-item"><span class="b-label">Seniority Alignment</span><span id="b-sen" class="b-value">—</span></div>
+            <div class="bench-item"><span class="b-label">Evidence Integrity</span><span id="b-evi" class="b-value">—</span></div>
+          </div>
+          <div class="charts-grid">
+            <div class="chart-wrapper"><canvas id="chart-radar"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-coverage"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-evidence"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-gaps"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-history"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-keywords"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-impact"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-timeline"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-completeness"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-confidence"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart-radar-compare"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detailed Analysis -->
+      <div class="details-grid">
+        <section class="card" id="ats-card" hidden>
+          <div class="card-header"><h2>ATS Compatibility</h2></div>
+          <div class="card-body"><div id="ats-out" class="json-output hidden"></div></div>
+        </section>
+        <section class="card" id="quality-card" hidden>
+          <div class="card-header"><h2>Quality & Cover Letter</h2></div>
+          <div class="card-body"><div id="quality-out" class="json-output hidden"></div></div>
+        </section>
+        <section class="card" id="gaps-card" hidden>
+          <div class="card-header"><h2>Skill Gaps</h2></div>
+          <div class="card-body"><div id="gaps-out" class="json-output hidden"></div></div>
+        </section>
+      </div>
+
+      <!-- Interview Chatbot -->
+      <section class="card" id="interview-card" hidden>
+        <div class="card-header"><h2>Interview Prep Chatbot</h2></div>
+        <div class="card-body">
+          <div id="question-list" class="question-list"></div>
+          <div class="chat-container">
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="chat-input-row">
+              <input type="text" id="chat-input" placeholder="Ask the AI anything about the interview...">
+              <button id="btn-chat-send" class="primary-btn">Send</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card export-card">
+        <div class="card-body"><button id="btn-export" class="secondary-btn">Export Results as CSV</button></div>
+      </section>
+    </main>
+  </div>
+  <script src="/static/app.js?v=12"></script>
+</body>
+</html>
